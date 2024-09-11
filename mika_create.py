@@ -2,8 +2,14 @@
 from PIL import Image
 from numpy import asarray
 
-#la fonction video2Images décompose une vidéo en 10 images par secondes
 def video2Images(lienVid):
+    """
+    Pour utiliser cette fonction, il faut mettre en argument un lien vers une vidéo locale sous le format String.
+    Exemple : video2Images("mika.mp4")
+    La vidéo sera alors décomposée en images (environ 10 par secondes)...
+    Par ailleurs, cette fonction retourne deux variables : le nombre d'images et la durée de la vidéo.
+    Voici donc comment l'utiliser : nImages,duree = video2Images("mika.mp4")
+    """
     import cv2
     vidcap = cv2.VideoCapture(lienVid)
     fps = vidcap.get(cv2.CAP_PROP_FPS)
@@ -21,12 +27,23 @@ def video2Images(lienVid):
     vidcap.release()
     return count,round(round(TMP)/round(fps))
 
-#la fonction recupererImage prend en entrée la source de l'image, l'importe dans python et la convertit en noir et blanc
 def recupererImage(lien):
+    """
+    Pour utiliser cette fonction, il faut mettre en argument un lien vers une image locale sous le format String.
+    Exemple : recupererImage("mika.jpg")
+    L'image sera alors convertie en nuance de gris et retournée.
+    Voici donc comment l'utiliser : imageWB = recupererImage("mika.jpg")
+    """
     return Image.open(lien).convert("L")
 
-#la fonction reduireTaulle reduit la qualité d'une image
 def reduireTaille(image,taille=10000):
+    """
+    Pour utiliser cette fonction, il faut mettre en argument une image déjà importée dans Python ainsi que, si on le souhaite, un entier (int).
+    Exemple : reduireTaille(image,5000)
+    L'image sera alors rétrécie pour qu'elle prenne environ 10,000.00 pixels (ou autre selon le deuxième argument).
+    Par ailleurs, la fonction reverra l'image rétrécie...
+    Voici donc comment l'utiliser : imageReduite = reduireTaille(image, 12000)
+    """
     x=image.size[0]
     y=image.size[1]
     taille=x*y/taille
@@ -34,30 +51,49 @@ def reduireTaille(image,taille=10000):
     y=y/(taille**0.5)
     return image.resize((int(x), int(y)))
 
-#la fonction image2Numpy convertit l'image en noir et blanc dans un tableau Numpy
 def image2Numpy(image):
+    """
+    La fonction image2Numpy prend en entrée une image et la retourne convertie en tableau Numpy.
+    Exemple : tableau = image2Numpy(image)
+    """
     return asarray(image)
 
-#la fonction numpy2Tableau convertit entre autre un tableau Numpy en une liste de listes
-def numpy2Tableau(tableau):
+def numpy2Tableau(tableau,nb=12):
+    """
+    La fonction numpy2Tableau convertit et retourne un tableau Numpy en une liste de liste en remplacant chaque élément du tableau par le calcul x=x/256*12 (le nombre 12 peut être remplacé dans l'appel de la fonction.
+    Exemple d'utilisation : liDeLi = numpy2Tableau(tabNumpy,12)
+    Son objectif est principalement de pouvoir l'utiliser plus tard pour faire de l'ASCII art.
+    """
     tab = []
     for i in range(len(tableau)):
         liste = []
         for j in tableau[i]:
-            liste.append(int(j/256*12))
+            liste.append(int(j/256*nb))
         tab.append(liste)
     return tab
 
-#la fonction tableau2Ascii prend une liste de listes en entrée et remplace chaque nombre par le cararctère approprié
 def tableau2Ascii(tableau):
+    """
+    Pour utiliser cette fonction, il faut mettre en argument une liste de listes d'entiers.
+    Exemple : tableau2Ascii([[...],[...],...])
+    Pour chaque case de la liste de listes, le programme prendra le caractère qui as pour indice la valeur de la case.
+    Exemple d'utilisation :
+    La commande print(tableau2Ascii([[2,4],[4,2]])) renverras [["&","{"],["{","&"]].
+    """
     liste=["#","@","&","$","{","(","=","*",";",":","."," "]
     for i in range(len(tableau)):
         for j in range(len(tableau[i])):
             tableau[i][j]=liste[tableau[i][j]]
     return tableau
 
-#la fonction listeDeCaract convertit une liste de listes en une liste de chaines de caractères
 def listeDeCaract(tableau):
+    """
+    Pour utiliser cette fonction, il faut mettre en argument une liste de listes.
+    Exemple : listeDeCaract([[...],[...],...])
+    Dans chaque sous-listes, le programme regroupe chaque éléments comme une chaine de caractères.
+    Exemple d'utilistion :
+    La commande print(listeDeCaract([["&","{"],["{","&"]])) renvera ["&{","{&"]
+    """
     liste=[]
     for i in range(len(tableau)):
         caracInter=""
