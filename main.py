@@ -25,4 +25,7 @@ def mika_video():
     export2Avi(liste_chemins,nb/duree)
     print("Votre video a bien ete exportee en "+str(int(time()-temps))+" secondes par le programme Mika. Toute l'equipe des roues detachables vous remercie")
 
-mika_video()
+if int(input("Pour quel type de fichier voulez-vous utiliser ce programme ? (1=Video ; 0=Photo)")):
+    mika_video()
+else:
+    mika_image()
