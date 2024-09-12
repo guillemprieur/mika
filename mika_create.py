@@ -76,9 +76,9 @@ def tableau2Ascii(tableau):
     """
     Pour utiliser cette fonction, il faut mettre en argument une liste de listes d'entiers.
     Exemple : tableau2Ascii([[...],[...],...])
-    Pour chaque case de la liste de listes, le programme prendra le caractère qui as pour indice la valeur de la case.
+    Pour chaque case de la liste de listes, le programme prendra le caractère qui a pour indice la valeur de la case.
     Exemple d'utilisation :
-    La commande print(tableau2Ascii([[2,4],[4,2]])) renverras [["&","{"],["{","&"]].
+    La commande print(tableau2Ascii([[2,4],[4,2]])) renverra [["&","{"],["{","&"]].
     """
     liste=["#","@","&","$","{","(","=","*",";",":","."," "]
     for i in range(len(tableau)):
@@ -90,9 +90,9 @@ def listeDeCaract(tableau):
     """
     Pour utiliser cette fonction, il faut mettre en argument une liste de listes.
     Exemple : listeDeCaract([[...],[...],...])
-    Dans chaque sous-listes, le programme regroupe chaque éléments comme une chaine de caractères.
+    Dans chaque sous-liste, le programme regroupe chaque élément comme une chaine de caractères.
     Exemple d'utilistion :
-    La commande print(listeDeCaract([["&","{"],["{","&"]])) renvera ["&{","{&"]
+    La commande print(listeDeCaract([["&","{"],["{","&"]])) renverra ["&{","{&"]
     """
     liste=[]
     for i in range(len(tableau)):
