@@ -1,5 +1,5 @@
 #importation des fonctions externes
-from mika_create import *
+import mika_create 
 from mika_export import *
 
 #importation des biliothèques
