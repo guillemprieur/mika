@@ -36,6 +36,15 @@ def recupererImage(lien):
     """
     return Image.open(lien).convert("L")
 
+def capturerWebcam(cap):
+    import cv2
+    ret, frame = cap.read()
+    #cap.release()
+    #cv2.destroyAllWindows()
+    image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    pil_image = Image.fromarray(image)
+    return pil_image.convert("L")
+
 def reduireTaille(image,taille=10000):
     """
     Pour utiliser cette fonction, il faut mettre en argument une image déjà importée dans Python ainsi que, si on le souhaite, un entier (int).
@@ -72,7 +81,7 @@ def numpy2Tableau(tableau,nb=12):
         tab.append(liste)
     return tab
 
-def tableau2Ascii(tableau):
+def tableau2Ascii(tableau,liste=0):
     """
     Pour utiliser cette fonction, il faut mettre en argument une liste de listes d'entiers.
     Exemple : tableau2Ascii([[...],[...],...])
@@ -80,13 +89,15 @@ def tableau2Ascii(tableau):
     Exemple d'utilisation :
     La commande print(tableau2Ascii([[2,4],[4,2]])) renverra [["&","{"],["{","&"]].
     """
-    liste=["#","@","&","$","{","(","=","*",";",":","."," "]
+    if type(liste) != list:
+        liste=["#","@","&","$","{","(","=","*",";",":","."," "]
+    
     for i in range(len(tableau)):
         for j in range(len(tableau[i])):
             tableau[i][j]=liste[tableau[i][j]]
     return tableau
 
-def listeDeCaract(tableau):
+def listeDeCaract(tableau,coef=1,depart=0):
     """
     Pour utiliser cette fonction, il faut mettre en argument une liste de listes.
     Exemple : listeDeCaract([[...],[...],...])
@@ -97,7 +108,7 @@ def listeDeCaract(tableau):
     liste=[]
     for i in range(len(tableau)):
         caracInter=""
-        for j in tableau[i]:
-            caracInter=caracInter+j
+        for j in range(depart,len(tableau[i])*coef-depart,coef):
+            caracInter=caracInter+tableau[i][j]
         liste.append(caracInter)
     return liste
