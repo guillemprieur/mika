@@ -53,8 +53,35 @@ def export2Avi(images,fpsvid=10):
     frame = cv2.imread(images[0])
     height, width, layers = frame.shape
     size = (width, height)
-    out = cv2.VideoWriter("mika_export.avi", cv2.VideoWriter_fourcc(*'DIVX'), fpsvid, size)
+    out = cv2.VideoWriter("mika_export_inter.avi", cv2.VideoWriter_fourcc(*'DIVX'), fpsvid, size)
     for image in images:
         img = cv2.imread(image)
         out.write(img)
     out.release()
+
+def combinerVidEtAudio(nom):
+    from moviepy.editor import VideoFileClip, AudioFileClip
+    # Chemin vers vos fichiers
+    video_path = "mika_export_inter.avi"
+    audio_path = nom
+    output_path = "mika_export_final.mp4"
+    
+    # Charger la vidéo et l'audio
+    video = VideoFileClip(video_path)
+    audio = VideoFileClip(audio_path).audio
+    
+    # Assigner l'audio à la vidéo
+    video = video.set_audio(audio)
+    
+    # Exporter la vidéo finale avec compression
+    video.write_videofile(
+        output_path,
+        codec='libx264',
+        audio_codec='aac',
+        bitrate='15M',  # Ajustez le bitrate pour la vidéo
+        audio_bitrate='128k'  # Ajustez le bitrate pour l'audio
+        )
+    
+    # Fermer les clips
+    video.close()
+    audio.close()
