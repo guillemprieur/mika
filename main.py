@@ -23,7 +23,9 @@ def mika_video():
         liste_chemins.append("./data/frame_export"+str(i)+".png")
     print("Toutes les images ont bien ete exportees, creation de la video en cours...")
     export2Avi(liste_chemins,nb/duree)
-    print("Votre video a bien ete exportee en "+str(int(time()-temps))+" secondes par le programme Mika. Toute l'equipe des roues detachables vous remercie")
+    print("Vidéo intermédiaire créée, création de la vidéo finale...")
+    combinerVidEtAudio(fichierVideo)
+    print("Votre video finale a bien ete exportee en "+str(int(time()-temps))+" secondes par le programme Mika. Toute l'equipe des roues detachables vous remercie")
 
 def mika_webcam(cap):
     afficherTerminal(listeDeCaract(tableau2Ascii(numpy2Tableau(image2Numpy(reduireTaille(capturerWebcam(cap),15000))),[" ",".",":",";","*","=","(","{","$","&","@","#"]),-1,-1))
