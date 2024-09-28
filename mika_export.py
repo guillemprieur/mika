@@ -17,6 +17,16 @@ def imprimTxt(liste):
         fichier.write("\n"+liste[i])
     fichier.close()
 
+def afficherTerminal(liste):
+    import sys
+    var=""
+    #var=liste[0]
+    for i in range(0,len(liste)):
+        if i%2==0:
+            var=var+"\n"+liste[i]
+    sys.stdout.write(var)
+    sys.stdout.flush()
+
 def export2Png(liste,num="",nom="mika_export"):
     """
     Pour utiliser la fonction export2Png(), il faut mettre de 1 à 3 arguments :
