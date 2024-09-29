@@ -104,6 +104,7 @@ def listeDeCaract(tableau,coef=1,depart=0):
     Dans chaque sous-liste, le programme regroupe chaque élément comme une chaine de caractères.
     Exemple d'utilistion :
     La commande print(listeDeCaract([["&","{"],["{","&"]])) renverra ["&{","{&"]
+    Les arguments coef et depart (initialement égaux à 1 et 0) servent à inverser l'image (en remplacant les deux valeurs par -1.
     """
     liste=[]
     for i in range(len(tableau)):
