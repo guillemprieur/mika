@@ -18,6 +18,14 @@ def imprimTxt(liste):
     fichier.close()
 
 def afficherTerminal(liste):
+    """
+    La fonction afficherTerminal affiche une liste de chaines de caractères dans le terminal.
+    Exemple d'utilisation : afficherTerminal("abc","bla") écriras dans un terminal et en un seul bloc :
+    ------
+    abc
+    bla
+    ------
+    """
     import sys
     var=""
     #var=liste[0]
@@ -60,28 +68,31 @@ def export2Avi(images,fpsvid=10):
     out.release()
 
 def combinerVidEtAudio(nom):
+    """
+    La fonction combinerVidEtAudio() s'utilise avec un seul argument : le lien vers une vidéo.
+    Exemple : combinerVidEtAudio("vidéos/relax.mp4")
+    La fonction va toute seule :
+    - Importer la vidéo initiale
+    - Extraire son audio
+    - Le mettre dans un fichier nommé mika_export_final.mp4 en ajoutant en image les images du fichier mika_export.avi    
+    """
     from moviepy.editor import VideoFileClip, AudioFileClip
-    # Chemin vers vos fichiers
     video_path = "mika_export_inter.avi"
     audio_path = nom
     output_path = "mika_export_final.mp4"
     
-    # Charger la vidéo et l'audio
     video = VideoFileClip(video_path)
     audio = VideoFileClip(audio_path).audio
     
-    # Assigner l'audio à la vidéo
     video = video.set_audio(audio)
     
-    # Exporter la vidéo finale avec compression
     video.write_videofile(
         output_path,
         codec='libx264',
         audio_codec='aac',
-        bitrate='15M',  # Ajustez le bitrate pour la vidéo
-        audio_bitrate='128k'  # Ajustez le bitrate pour l'audio
+        bitrate='15M', 
+        audio_bitrate='128k' 
         )
     
-    # Fermer les clips
     video.close()
     audio.close()
